@@ -137,3 +137,26 @@ SELECT name, region FROM bbc x
  SELECT name,region,population FROM bbc x WHERE 50000 < ALL (SELECT population FROM bbc y WHERE x.region=y.region AND y.population>0)
 
  SELECT region, name, population FROM bbc x WHERE population <= ALL (SELECT population FROM bbc y WHERE y.region=x.region AND population>0)
+
+/* Aggregate function */
+
+SELECT SUM(population)
+FROM world
+
+SELECT continent
+FROM world x
+WHERE name >= ALL (SELECT name
+FROM world y
+WHERE x.continent = y.continent);
+
+SELECT SUM(gdp)
+FROM world
+WHERE continent = 'Africa'
+
+SELECT COUNT(name)
+FROM world
+WHERE area >= 1000000
+
+SELECT SUM(population)
+FROM world
+WHERE name IN ('Estonia', 'Latvia', 'Lithuania')
