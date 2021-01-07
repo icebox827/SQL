@@ -101,3 +101,12 @@ FROM nobel
 SELECT yr, subject, winner
 FROM nobel
   WHERE yr = 1980 AND subject <> 'Chemistry' AND subject <> 'Medicine';
+
+SELECT yr, subject, winner
+FROM nobel
+  WHERE yr < 1910 and subject = 'Medicine'
+   OR yr > 2004 and subject = 'Literature'
+
+SELECT *
+FROM nobel
+  WHERE winner = 'EUGENE O\'NEILL';
