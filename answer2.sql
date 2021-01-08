@@ -77,3 +77,90 @@ SELECT player, teamid, COUNT(*)
    AND teamid != 'GRE'
  GROUP BY player, teamid
 
+-- More Join answer
+
+SELECT id, title
+ FROM movie
+ WHERE yr=1962
+
+SELECT yr
+ FROM movie
+ WHERE title = 'Citizen Kane'
+
+SELECT id, title, yr
+FROM movie
+WHERE title LIKE '%Star Trek%'
+ORDER BY yr;
+
+SELECT id
+FROM actor
+WHERE name = 'Glenn Close';
+
+SELECT id
+FROM movie
+WHERE title = 'Casablanca';
+
+SELECT name
+FROM movie JOIN casting ON movie.id = movieid
+    JOIN actor ON actor.id = actorid
+WHERE movieid = 11768;
+
+SELECT name
+FROM movie JOIN casting ON movie.id = movieid
+    JOIN actor ON actor.id = actorid
+WHERE title = 'Alien';
+
+SELECT title
+FROM movie JOIN casting ON movie.id = movieid
+    JOIN actor ON actor.id = actorid
+WHERE name = 'Harrison Ford' AND ord != 1;
+
+SELECT name
+FROM movie JOIN casting ON movie.id = movieid
+    JOIN actor ON actor.id = actorid
+WHERE title = 'Alien';
+
+SELECT title, name
+FROM movie JOIN casting ON movie.id = movieid
+    JOIN actor ON actor.id = actorid
+WHERE yr = 1962 AND ord = 1;
+
+SELECT yr, COUNT(title)
+FROM
+    movie JOIN casting ON movie.id=movieid
+    JOIN actor ON actorid=actor.id
+WHERE name='Rock Hudson'
+GROUP BY yr
+HAVING COUNT(title) > 2;
+
+SELECT title, name
+FROM movie JOIN casting ON (movie.id=movieid AND ord = 1)
+    JOIN actor ON actorid=actor.id
+WHERE movieid  IN (
+SELECT movieid
+FROM casting
+WHERE actorid IN (
+  SELECT id
+FROM actor
+WHERE name='Julie Andrews'));
+
+SELECT name
+FROM actor JOIN casting ON (actor.id = actorid AND ord = 1)
+GROUP BY name
+HAVING COUNT(name) > 14
+ORDER BY name;
+
+SELECT title, COUNT(name)
+FROM movie JOIN casting ON movie.id=movieid
+    JOIN actor ON actorid=actor.id
+WHERE yr = 1978
+GROUP BY title
+ORDER BY COUNT(name) DESC, title
+
+SELECT name
+FROM movie JOIN casting ON movie.id=movieid
+    JOIN actor ON actorid=actor.id
+WHERE title IN (SELECT title
+    FROM movie JOIN casting ON movie.id=movieid
+        JOIN actor ON actorid=actor.id
+    WHERE name =  'Art Garfunkel') AND name != 'Art Garfunkel'
