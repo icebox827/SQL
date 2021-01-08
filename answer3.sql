@@ -96,3 +96,19 @@ FROM route a JOIN route b ON
   (a.company=b.company AND a.num=b.num)
 WHERE a.stop=53 AND b.stop = 149;
 
+SELECT a.company, a.num, stopa.name, stopb.name
+FROM route a JOIN route b ON
+  (a.company=b.company AND a.num=b.num)
+    JOIN stops stopa ON (a.stop=stopa.id)
+    JOIN stops stopb ON (b.stop=stopb.id)
+WHERE stopa.name='Craiglockhart'
+    AND stopb.name='London Road';
+
+SELECT stopb.name, a.company, a.num
+FROM route a JOIN route b ON
+  (a.company=b.company AND a.num=b.num)
+    JOIN stops stopa ON (a.stop=stopa.id)
+    JOIN stops stopb ON (b.stop=stopb.id)
+        AND stopa.name='Craiglockhart';
+
+-- Self Join Quiz
