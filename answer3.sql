@@ -62,3 +62,11 @@ SELECT name,
     WHEN dept = 3 THEN 'Art' 
     ELSE 'None' END
 FROM teacher;
+
+-- Null Quiz
+
+SELECT dept.name, COUNT(teacher.name) FROM teacher RIGHT JOIN dept ON dept.id = teacher.dept GROUP BY dept.name
+
+SELECT dept.name FROM teacher JOIN dept ON (dept.id = teacher.dept) WHERE teacher.name = 'Cutflower'
+
+SELECT teacher.name, dept.name FROM teacher LEFT OUTER JOIN dept ON (teacher.dept = dept.id)
