@@ -13,3 +13,7 @@ SELECT name, COUNT(movieid)
 SELECT *
   FROM actor JOIN casting ON actor.id = actorid
    JOIN movie ON movie.id = movieid
+
+SELECT name
+  FROM actor INNER JOIN movie ON actor.id = director
+ WHERE gross < budget
